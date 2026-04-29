@@ -15,6 +15,8 @@ import updateConfig from "./src/integration/updateConfig.ts";
 
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 
+import cloudflare from "@astrojs/cloudflare";
+
 // https://astro.build/config
 export default defineConfig({
   vite: {
@@ -23,13 +25,16 @@ export default defineConfig({
       'import.meta.env.YAML_GITHUB_CONFIG': JSON.stringify(GITHUB_CONFIG || null)
     }
   },
+
   site: USER_SITE,
   output: "static",
+
   style: {
     scss: {
       includePaths: ["./src/styles"],
     },
   },
+
   integrations: [
     updateConfig(),
     react(),
@@ -45,6 +50,7 @@ export default defineConfig({
     }),
     playformCompress(),
   ],
+
   markdown: {
     shikiConfig: {
       theme: CODE_THEME,
@@ -220,6 +226,7 @@ export default defineConfig({
       },
     ]],
   },
+
   vite: {
     css: {
       preprocessorOptions: {
@@ -229,4 +236,6 @@ export default defineConfig({
       },
     },
   },
+
+  adapter: cloudflare()
 });

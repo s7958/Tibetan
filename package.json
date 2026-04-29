@@ -10,11 +10,14 @@
     "build": "pnpm prefetch:music && astro check && astro build && pagefind --site dist && cpy 'dist/pagefind/**' public/pagefind",
     "search:clean": "rimraf public/pagefind",
     "search:index": "npm run build && cpy 'dist/pagefind/**' public/pagefind",
-    "preview": "astro preview",
-    "astro": "astro"
+    "preview": "pnpm run build && wrangler dev",
+    "astro": "astro",
+    "deploy": "pnpm run build && wrangler deploy",
+    "cf-typegen": "wrangler types"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
+    "@astrojs/cloudflare": "12",
     "@astrojs/mdx": "^4.3.0",
     "@astrojs/react": "^4.4.2",
     "@astrojs/rss": "^4.0.12",
@@ -96,6 +99,7 @@
     "tailwindcss-animate": "^1.0.7",
     "ts-jest": "^29.3.4",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "wrangler": "^4.86.0"
   }
 }
