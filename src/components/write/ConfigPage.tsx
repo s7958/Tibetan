@@ -659,6 +659,58 @@ export function ConfigPage() {
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <div className="divider my-0"></div>
+
+                                        {/* Meting API */}
+                                        <div className="space-y-3">
+                                            <div className="flex items-center gap-2">
+                                                <div className="badge badge-accent badge-outline">Meting</div>
+                                                <span className="text-sm font-medium">音乐播放器</span>
+                                            </div>
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                                                <div className="form-control w-full">
+                                                    <label className="label"><span className="label-text text-xs text-base-content/60">数据源(Server)</span></label>
+                                                    <CustomSelect
+                                                        value={parsedConfig?.site?.meting?.server || 'netease'}
+                                                        onChange={val => updateConfigValue('site.meting.server', val)}
+                                                        options={[
+                                                            { value: 'netease', label: '网易云音乐' },
+                                                            { value: 'tencent', label: 'QQ音乐' },
+                                                            { value: 'kugou', label: '酷狗音乐' }
+                                                        ]}
+                                                    />
+                                                </div>
+                                                <div className="form-control w-full">
+                                                    <label className="label"><span className="label-text text-xs text-base-content/60">歌单ID</span></label>
+                                                    <input type="text" className="input input-bordered w-full bg-base-100 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+                                                        placeholder="例如: 8900628861"
+                                                        value={parsedConfig?.site?.meting?.id || ''}
+                                                        onChange={e => updateConfigValue('site.meting.id', e.target.value)} />
+                                                </div>
+                                                <div className="form-control w-full">
+                                                    <label className="label"><span className="label-text text-xs text-base-content/60">音质(Bitrate)</span></label>
+                                                    <CustomSelect
+                                                        value={parsedConfig?.site?.meting?.br || '320'}
+                                                        onChange={val => updateConfigValue('site.meting.br', val)}
+                                                        options={[
+                                                            { value: '128', label: '128k (标准)' },
+                                                            { value: '320', label: '320k (极高)' },
+                                                            { value: '380', label: 'Flac (无损)' },
+                                                            { value: '400', label: 'Flac (Hi-Res)' }
+                                                        ]}
+                                                    />
+                                                </div>
+                                                <div className="form-control w-full flex-row items-center pt-8">
+                                                    <label className="cursor-pointer label p-0 gap-2">
+                                                        <span className="label-text font-medium text-sm">解析并显示译文</span>
+                                                        <input type="checkbox" className="toggle toggle-md toggle-primary"
+                                                            checked={parsedConfig?.site?.meting?.trans !== false}
+                                                            onChange={e => updateConfigValue('site.meting.trans', e.target.checked)} />
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 

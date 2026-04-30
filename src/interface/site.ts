@@ -90,6 +90,12 @@ export interface SiteConfig {
     dark: string;
     code: string;
   };
+  meting?: {
+    server?: string;
+    id?: string;
+    br?: string;
+    trans?: boolean;
+  };
   date_format: string;
   blog: BlogConfig;
   menu: MenuItem[];

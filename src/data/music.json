@@ -1,63 +1,290 @@
 [
     {
-        "title": "His Smile",
-        "artist": "麗美",
-        "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/0f/9a/c9/0f9ac9a4-f340-bef3-1209-7e0ea0e2b006/NOPA-7360.jpg/592x592bb.webp",
-        "url": "https://picbed.131714.xyz/music/His%20Smile%20-%20麗美.flac",
-        "duration": "04:56"
+        "title": "蝴蝶",
+        "artist": "洛天依/桃小薇",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=109951172078581753",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=2750754678&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=2750754678&format=lrc&trans=true",
+        "duration": ""
     },
     {
-        "title": "Style",
-        "artist": "Taylor Swift",
-        "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/fe/57/5f/fe575f85-b843-e190-b043-2605d5f6ec59/14UMGIM34830.rgb.jpg/592x592bb.webp",
-        "url": "https://picbed.131714.xyz/music/Style%20-%20Taylor%20Swift.flac",
-        "lrc": "https://picbed.131714.xyz/music/Style%20-%20Taylor%20Swift.lrc",
-        "duration": "03:51"
+        "title": "馬",
+        "artist": "洛天依Official",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=109951172209710553",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=3312146697&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=3312146697&format=lrc&trans=true",
+        "duration": ""
     },
     {
-        "title": "Beautiful World (Da Capo Version)",
-        "artist": "宇多田ヒカル",
-        "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/e2/2c/0d/e22c0db8-27f6-7dc3-2d49-3a6e95e827fb/4547366488920.jpg/592x592bb.webp",
-        "url": "https://picbed.131714.xyz/music/Beautiful%20World%20(Da%20Capo%20Version)%20-%20%E5%AE%87%E5%A4%9A%E7%94%B0%E3%83%92%E3%82%AB%E3%83%AB.flac",
-        "duration": "05:58"
+        "title": "启航的歌",
+        "artist": "ChiliChill乐团",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=109951169651949324",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=2162911948&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=2162911948&format=lrc&trans=true",
+        "duration": ""
+    },
+    {
+        "title": "空心人札记",
+        "artist": "Calia-林焰",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=109951171906929489",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=2738459901&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=2738459901&format=lrc&trans=true",
+        "duration": ""
+    },
+    {
+        "title": "请不要带我走。",
+        "artist": "奥莉安多幻想曲/诗岸",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=109951170987347337",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=2705295646&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=2705295646&format=lrc&trans=true",
+        "duration": ""
+    },
+    {
+        "title": "群青",
+        "artist": "泠鸢yousa/Ayase",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=109951167357333097",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=1942909267&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=1942909267&format=lrc&trans=true",
+        "duration": ""
+    },
+    {
+        "title": "太陽系デスコ",
+        "artist": "ナユタン星人/初音ミク",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=109951165779582807",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=459717345&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=459717345&format=lrc&trans=true",
+        "duration": ""
+    },
+    {
+        "title": "Altale",
+        "artist": "削除",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=109951165315388508",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=30148635&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=30148635&format=lrc&trans=true",
+        "duration": ""
+    },
+    {
+        "title": "恋ひ恋ふ縁",
+        "artist": "Famishin/KOTOKO",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=19019352137357551",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=473403182&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=473403182&format=lrc&trans=true",
+        "duration": ""
+    },
+    {
+        "title": "生如逆旅（Cover 米津玄师）",
+        "artist": "圈9",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=109951163335209234",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=571463522&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=571463522&format=lrc&trans=true",
+        "duration": ""
+    },
+    {
+        "title": "world.execute (me) ;",
+        "artist": "Mili",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=18801648835570109",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=435278010&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=435278010&format=lrc&trans=true",
+        "duration": ""
+    },
+    {
+        "title": "Talking to the Rain(星尘Infinity)",
+        "artist": "旅行的蜗牛/星尘",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=109951167412282908",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=1947421379&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=1947421379&format=lrc&trans=true",
+        "duration": ""
+    },
+    {
+        "title": "世末歌者（Cover 乐正绫）",
+        "artist": "双笙（陈元汐）/封茗囧菌",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=17934134160859736",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=429460399&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=429460399&format=lrc&trans=true",
+        "duration": ""
+    },
+    {
+        "title": "万一对了呢",
+        "artist": "黎歌Neeko",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=109951166492872572",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=1983091065&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=1983091065&format=lrc&trans=true",
+        "duration": ""
+    },
+    {
+        "title": "难过233秒",
+        "artist": "Sawako碎花",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=109951166206597215",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=1863477523&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=1863477523&format=lrc&trans=true",
+        "duration": ""
+    },
+    {
+        "title": "グッバイ宣言",
+        "artist": "Chinozo",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=109951165791544099",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=1826139261&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=1826139261&format=lrc&trans=true",
+        "duration": ""
+    },
+    {
+        "title": "弱虫だって",
+        "artist": "咩栗/呜米",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=109951166274885399",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=1868838401&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=1868838401&format=lrc&trans=true",
+        "duration": ""
+    },
+    {
+        "title": "この世界を愛したい",
+        "artist": "鹿乃",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=109951168746358088",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=2064848159&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=2064848159&format=lrc&trans=true",
+        "duration": ""
+    },
+    {
+        "title": "使一颗心免于哀伤",
+        "artist": "Akie秋绘",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=109951169339305907",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=2126754671&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=2126754671&format=lrc&trans=true",
+        "duration": ""
+    },
+    {
+        "title": "Testify",
+        "artist": "void/星熊南巫",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=109951167701021341",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=1965912564&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=1965912564&format=lrc&trans=true",
+        "duration": ""
     },
     {
         "title": "One Last Kiss",
         "artist": "宇多田ヒカル",
-        "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/e2/2c/0d/e22c0db8-27f6-7dc3-2d49-3a6e95e827fb/4547366488920.jpg/592x592bb.webp",
-        "url": "https://picbed.131714.xyz/music/One%20Last%20Kiss%20-%20%E5%AE%87%E5%A4%9A%E7%94%B0%E3%83%92%E3%82%AB%E3%83%AB.flac",
-        "duration": "04:12"
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=109951165791860501",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=1824020871&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=1824020871&format=lrc&trans=true",
+        "duration": ""
     },
     {
-        "title": "将故事写成我们",
-        "artist": "林俊杰",
-        "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/b4/60/09/b4600934-05dd-b5e6-7d41-46cdb2ac304a/190295343361.jpg/592x592bb.webp",
-        "url": "https://picbed.131714.xyz/music/%E5%B0%86%E6%95%85%E4%BA%8B%E5%86%99%E6%88%90%E6%88%91%E4%BB%AC%20-%20%E6%9E%97%E4%BF%8A%E6%9D%B0.flac",
-        "lrc": "https://picbed.131714.xyz/music/%E5%B0%86%E6%95%85%E4%BA%8B%E5%86%99%E6%88%90%E6%88%91%E4%BB%AC%20-%20%E6%9E%97%E4%BF%8A%E6%9D%B0.lrc",
-        "duration": "05:35"
+        "title": "迟来的毕业",
+        "artist": "Bo Peep/老番茄",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=109951168451980735",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=2028309378&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=2028309378&format=lrc&trans=true",
+        "duration": ""
     },
     {
-        "title": "みちしるべ",
-        "artist": "茅原実里",
-        "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/75/c8/c4/75c8c47c-caff-649b-82a2-081d8a80d23a/4540774147137.png/592x592bb.webp",
-        "url": "https://picbed.131714.xyz/music/%E3%81%BF%E3%81%A1%E3%81%97%E3%82%8B%E3%81%B9%20-%20%E8%8C%85%E5%8E%9F%E5%AE%9F%E9%87%8C.flac",
-        "lrc": "https://picbed.131714.xyz/music/%E3%81%BF%E3%81%A1%E3%81%97%E3%82%8B%E3%81%B9%20-%20%E8%8C%85%E5%8E%9F%E5%AE%9F%E9%87%8C.lrc",
-        "duration": "04:46"
+        "title": "starlight",
+        "artist": "洛天依Official",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=109951164204349759",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=1377061819&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=1377061819&format=lrc&trans=true",
+        "duration": ""
     },
     {
-        "title": "Love Story",
-        "artist": "Taylor Swift",
-        "cover": "https://is1-ssl.mzstatic.com/image/thumb/Video124/v4/7d/a3/88/7da388ea-28b6-acde-a2db-3586884bd28e/Job8bd8b474-05f4-47aa-b79e-7876585e3a01-110587237-PreviewImage_preview_image_nonvideo_sdr-Time1617126173244.png/900x900bb.webp",
-        "url": "https://picbed.131714.xyz/music/Love%20Story%20(Taylor%E2%80%99s%20Version)%20-%20Taylor%20Swift.flac",
-        "lrc": "https://picbed.131714.xyz/music/Love%20Story%20(Taylor%E2%80%99s%20Version)%20-%20Taylor%20Swift.lrc",
-        "duration": "03:55"
+        "title": "别让我担心 (Acoustic Ver.)",
+        "artist": "ChiliChill乐团",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=109951169052426208",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=2099318071&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=2099318071&format=lrc&trans=true",
+        "duration": ""
     },
     {
-        "title": "可惜没如果",
-        "artist": "林俊杰",
-        "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/57/5a/1b/575a1bc9-ca86-7549-e873-b55663ba6276/4711508105925.jpg/592x592bb.webp",
-        "url": "https://picbed.131714.xyz/music/%E5%8F%AF%E6%83%9C%E6%B2%A1%E5%A6%82%E6%9E%9C%20-%20%E6%9E%97%E4%BF%8A%E6%9D%B0.mp3",
-        "lrc": "https://picbed.131714.xyz/music/%E5%8F%AF%E6%83%9C%E6%B2%A1%E5%A6%82%E6%9E%9C%20-%20%E6%9E%97%E4%BF%8A%E6%9D%B0.lrc",
-        "duration": "04:58"
+        "title": "I Really Want to Stay At Your House",
+        "artist": "平行四界Quadimension/星尘",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=109951167948235616",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=1987797502&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=1987797502&format=lrc&trans=true",
+        "duration": ""
+    },
+    {
+        "title": "星愿StarWish",
+        "artist": "星尘/平行四界Quadimension",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=109951162879679523",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=506607859&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=506607859&format=lrc&trans=true",
+        "duration": ""
+    },
+    {
+        "title": "方向",
+        "artist": "SVATOX/赤羽",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=109951164594972003",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=1413428742&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=1413428742&format=lrc&trans=true",
+        "duration": ""
+    },
+    {
+        "title": "∞ TIMEs",
+        "artist": "洛天依Official/星葵77",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=109951167935791733",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=1986743401&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=1986743401&format=lrc&trans=true",
+        "duration": ""
+    },
+    {
+        "title": "轻涟 La vaguelette",
+        "artist": "HOYO-MiX",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=109951169058808374",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=2100334024&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=2100334024&format=lrc&trans=true",
+        "duration": ""
+    },
+    {
+        "title": "野火 Wildfire",
+        "artist": "HOYO-MiX/Jonathan Steingard",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=109951168599498949",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=2045806409&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=2045806409&format=lrc&trans=true",
+        "duration": ""
+    },
+    {
+        "title": "让风告诉你",
+        "artist": "康熙/等一下就回家",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=109951168844161263",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=2073418737&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=2073418737&format=lrc&trans=true",
+        "duration": ""
+    },
+    {
+        "title": "深海少女 -deep sea girl- (feat. 初音ミク)",
+        "artist": "ゆうゆ/初音ミク",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=109951168146886963",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=2006735434&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=2006735434&format=lrc&trans=true",
+        "duration": ""
+    },
+    {
+        "title": "闭眼，我触碰幻想的边界",
+        "artist": "苏逸_Suyi/洛天依Official",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=109951168252208407",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=2016400471&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=2016400471&format=lrc&trans=true",
+        "duration": ""
+    },
+    {
+        "title": "星芒(Feat.洛天依)",
+        "artist": "HawkLegend/洛天依",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=109951164221347709",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=1378626275&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=1378626275&format=lrc&trans=true",
+        "duration": ""
+    },
+    {
+        "title": "千里邀月",
+        "artist": "乐正绫/泠鸢yousa/茶理理/Hanser/三无Marblue",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=109951172356060815",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=1391419936&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=1391419936&format=lrc&trans=true",
+        "duration": ""
+    },
+    {
+        "title": "歌行四方",
+        "artist": "洛天依Official",
+        "cover": "https://163.hyc.moe?server=netease&type=pic&id=109951168884148478",
+        "url": "https://163.hyc.moe?server=netease&type=url&id=2078368206&br=320",
+        "lrc": "https://163.hyc.moe?server=netease&type=lrc&id=2078368206&format=lrc&trans=true",
+        "duration": ""
     }
 ]
