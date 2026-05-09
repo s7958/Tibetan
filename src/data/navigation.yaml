@@ -3,7 +3,7 @@
   items:
     - name: Umami
       avatar: https://img.131714.xyz/file/Logo/1753850918996_umami.png
-      description: 网站访问统计分析平台
+      description: 网站访问统计分析
       url: https://umami.is/dashboard
       category: 开发工具
       id: DEV001
