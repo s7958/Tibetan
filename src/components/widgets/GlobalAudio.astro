@@ -76,6 +76,8 @@ const initialSong = musicList[0] || {};
             this.closeTimer = null;
             this.isDraggingProgress = false;
             this.isDraggingVolume = false;
+            this.playlistCounts = {};
+            this.playlistSongs = {};
 
             // Initial binding
             this.handlePageLoad();
@@ -134,6 +136,12 @@ const initialSong = musicList[0] || {};
                     this.loadLyrics();
                 }
                 
+                // Load static per-playlist songs from build-time data
+                const playlistSongsAttr = this.container?.dataset?.playlistSongs;
+                if (playlistSongsAttr) {
+                    try { this.playlistSongs = JSON.parse(playlistSongsAttr); } catch(e) {}
+                }
+
                 this.updatePlaylistDurations();
                 this.bindPlaylistEvents();
             }
@@ -346,17 +354,118 @@ const initialSong = musicList[0] || {};
                    }
                 });
             });
+
+            // 歌单列表查看全部 toggle
+            const btnToggle = document.getElementById('btn-toggle-playlists');
+            if (btnToggle && !btnToggle.dataset.bound) {
+                btnToggle.addEventListener('click', () => {
+                    const overflowItems = document.querySelectorAll('.playlist-overflow');
+                    const toggleText = document.getElementById('btn-toggle-text');
+                    const toggleArrow = document.getElementById('btn-toggle-arrow');
+                    const isExpanded = overflowItems.length > 0 && !overflowItems[0].classList.contains('hidden');
+
+                    overflowItems.forEach(item => {
+                        if (isExpanded) {
+                            item.classList.add('hidden');
+                        } else {
+                            item.classList.remove('hidden');
+                        }
+                    });
+
+                    if (toggleText) {
+                        toggleText.textContent = isExpanded ? `查看全部 (${overflowItems.length + 4})` : '收起';
+                    }
+                    if (toggleArrow) {
+                        toggleArrow.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
+                    }
+                });
+                btnToggle.dataset.bound = 'true';
+            }
+
+            // 歌单列表条目点击 - switch playlist
+            const playlistEntries = document.querySelectorAll('.playlist-entry-item');
+            playlistEntries.forEach(entry => {
+                if (!entry.dataset.bound) {
+                    entry.addEventListener('click', async () => {
+                        const playlistId = entry.dataset.playlistId;
+                        if (!playlistId) return;
+
+                        // Update active highlight
+                        document.querySelectorAll('.playlist-entry-item').forEach(e => {
+                            e.classList.remove('playlist-active', 'border-0');
+                            e.classList.add('border', 'border-transparent');
+                            e.style.backgroundColor = '';
+                            e.style.color = '';
+                            const svg = e.querySelector('svg');
+                            const h3 = e.querySelector('h3');
+                            const span = e.querySelector('span');
+                            if (svg) { svg.style.color = ''; svg.classList.add('text-neu-text-muted'); }
+                            if (h3) { h3.style.color = ''; h3.classList.add('text-neu-text'); }
+                            if (span) { span.style.color = ''; span.classList.add('text-neu-text-muted'); }
+                        });
+                        entry.classList.add('playlist-active', 'border-0');
+                        entry.classList.remove('border', 'border-transparent');
+                        const activeColor = getComputedStyle(document.documentElement).getPropertyValue('--p').trim();
+                        entry.style.backgroundColor = `oklch(${activeColor} / 0.15)`;
+                        const svg = entry.querySelector('svg');
+                        const h3 = entry.querySelector('h3');
+                        const span = entry.querySelector('span');
+                        if (svg) { svg.style.color = `oklch(${activeColor})`; svg.classList.remove('text-neu-text-muted'); }
+                        if (h3) { h3.style.color = `oklch(${activeColor})`; h3.classList.remove('text-neu-text'); }
+                        if (span) { span.style.color = `oklch(${activeColor})`; span.classList.remove('text-neu-text-muted'); }
+                        // Update song count
+                        if (span && this.playlistCounts[playlistId]) {
+                            span.textContent = `${this.playlistCounts[playlistId]}首`;
+                        }
+
+                        // Use build-time static playlist data (with durations)
+                        const songs = this.playlistSongs[playlistId];
+                        if (songs && songs.length > 0) {
+                            this.playlist = songs;
+                            this.playlistCounts[playlistId] = songs.length;
+                            this.currentIndex = 0;
+                            this.renderPlaylistList();
+                            this.loadSong(0, true);
+                        } else {
+                            console.warn(`No static data for playlist ${playlistId}`);
+                        }
+                    });
+                    entry.dataset.bound = 'true';
+                }
+            });
+        }
+
+        renderPlaylistList() {
+            const playlistListEl = document.getElementById('playlist-list');
+            if (!playlistListEl) return;
+            playlistListEl.innerHTML = this.playlist.map((song, index) => `
+                <li class="playlist-item group flex items-center gap-3 p-3 rounded-2xl hover:bg-black/5 dark:hover:bg-white/5 border border-transparent transition-all cursor-pointer" data-index="${index}">
+                    <span class="font-mono text-neu-text-muted text-sm font-bold w-6 text-center group-hover:text-neu-accent transition-colors">${String(index + 1).padStart(2, '0')}</span>
+                    <div class="relative w-12 h-12 rounded-lg overflow-hidden shrink-0 border border-neu-border/50">
+                        <img src="${song.cover || ''}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="cover" loading="lazy"/>
+                        <div class="absolute inset-0 bg-black/10 flex items-center justify-center opacity-0 group-[.active]:opacity-100 transition-opacity">
+                            <div class="w-1.5 h-4 gap-0.5 flex items-end justify-center">
+                                <div class="w-0.5 bg-white h-2 animate-pulse"></div>
+                                <div class="w-0.5 bg-white h-3 animate-pulse delay-75"></div>
+                                <div class="w-0.5 bg-white h-1 animate-pulse delay-150"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-1 min-w-0 flex flex-col justify-center gap-1">
+                        <h3 class="font-bold text-neu-text truncate text-sm leading-none">${song.title || 'Unknown'}</h3>
+                        <p class="text-[11px] text-neu-text-muted truncate uppercase tracking-wider">${song.artist || ''}</p>
+                    </div>
+                    <div class="text-xs font-mono text-neu-text-muted font-bold playlist-duration" data-song-index="${index}">${song.duration || '--:--'}</div>
+                </li>
+            `).join('');
+            this.bindPlaylistEvents();
         }
 
         async updatePlaylistDurations() {
              const items = document.querySelectorAll('.playlist-item .playlist-duration');
              this.playlist.forEach((song, index) => {
-                if (items[index]) {
-                    if (song.duration) {
-                        items[index].textContent = song.duration;
-                    } else if (song.url) {
-                         // Optional: client side fetch
-                    }
+                if (items[index] && song.duration) {
+                    items[index].textContent = song.duration;
                 }
              });
         }
@@ -580,7 +689,7 @@ const initialSong = musicList[0] || {};
                 // Text
                 if(this.playerTitle) this.playerTitle.textContent = song.title || "Unknown Title";
                 if(this.playerArtist) this.playerArtist.textContent = song.artist || "Unknown Artist";
-                
+
                 // Covers
                 if(this.playerCover) this.playerCover.src = coverSrc;
                 if(this.bgCover) this.bgCover.src = coverSrc;
@@ -945,6 +1054,7 @@ const initialSong = musicList[0] || {};
         newInstance.lrcUrl = oldInstance.lrcUrl;
         newInstance.audio = oldInstance.audio;
         newInstance.isMiniOpen = oldInstance.isMiniOpen;
+        newInstance.playlistSongs = oldInstance.playlistSongs;
         
         // cleanup old events/timers if necessary
         if(oldInstance.closeTimer) clearTimeout(oldInstance.closeTimer);

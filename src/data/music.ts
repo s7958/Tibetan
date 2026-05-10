@@ -19,9 +19,15 @@ export interface MusicItem {
  *   "lrc": "歌词链接(可选)",
  *   "duration": "00:00(将会自动抓取)"
  * }
- * 
+ *
  * 运行 `pnpm prefetch:music` 即可自动更新 Meting 歌单数据。
  */
 import musicData from './music.json';
 
-export const musicList: MusicItem[] = musicData;
+// 兼容新旧格式：新格式为 { songs, playlistCounts }, 旧格式为数组
+const raw: any = musicData;
+export const musicList: MusicItem[] = Array.isArray(raw) ? raw : (raw.songs || []);
+
+export const playlistCounts: Record<string, number> = Array.isArray(raw) ? {} : (raw.playlistCounts || {});
+
+export const playlistSongs: Record<string, MusicItem[]> = Array.isArray(raw) ? {} : (raw.playlistSongs || {});

@@ -1,8 +1,14 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { ConfigPage } from '@/components/write/ConfigPage';
+import { MUSIC_CONFIG } from '@/config';
+
+const serverPlaylists = JSON.stringify(MUSIC_CONFIG?.playlists || []);
 ---
 
 <BaseLayout title="站点配置" showSidebar={false} showBanner={false} isIndexed={false}>
+    <script define:vars={{ serverPlaylists }}>
+        window.__SERVER_PLAYLISTS__ = JSON.parse(serverPlaylists);
+    </script>
     <ConfigPage client:only="react" />
 </BaseLayout>

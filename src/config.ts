@@ -113,6 +113,11 @@ export function t(key: string): string {
   return translationCache[key];
 }
 
+// Music 配置
+export const MUSIC_CONFIG = config.music || {
+  playlists: []
+};
+
 // Umami 配置接口
 export interface UmamiConfig {
   enable: boolean;

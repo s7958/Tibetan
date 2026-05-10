@@ -1,13 +1,19 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import MusicPlayer from "@/components/widgets/MusicPlayer.astro";
-import { musicList } from "@/data/music";
+import { musicList, playlistCounts, playlistSongs } from "@/data/music";
+import { MUSIC_CONFIG } from "@/config";
+
+const playlists = MUSIC_CONFIG?.playlists || [];
 ---
 
 <BaseLayout title="音乐" showSidebar={true} showTOC={false} isIndexed={false}>
-  <div class="max-w-4xl mx-auto py-8 px-4">
-    <MusicPlayer 
+  <div class="py-8 px-4">
+    <MusicPlayer
       list={musicList}
+      playlists={playlists}
+      playlistCounts={playlistCounts}
+      playlistSongs={playlistSongs}
     />
   </div>
 </BaseLayout>

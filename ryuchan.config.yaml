@@ -105,6 +105,23 @@ anime:
   tmdb:
     apiKey: 08a6bef260044f70c150251c79f2e476
     listId: '8556173'
+music:
+  playlists:
+    - id: '17933567326'
+      name: 默认歌单
+      server: netease
+    - id: '17956985703'
+      name: 我的歌单
+      server: netease
+    - id: '17957187425'
+      name: 歌单3
+      server: netease
+    - id: '17957136689'
+      name: 歌单4
+      server: netease
+    - id: '17957179525'
+      name: 歌单5
+      server: netease
 github:
   owner: kobaridev
   repo: RyuChan

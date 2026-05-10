@@ -172,6 +172,16 @@ export interface AnimeConfig {
   tmdb?: TmdbConfig;
 }
 
+export interface PlaylistEntry {
+  id: string;
+  name: string;
+  server?: string;
+}
+
+export interface MusicConfig {
+  playlists?: PlaylistEntry[];
+}
+
 import type { UmamiConfig } from "../config";
 export interface Config {
   site: SiteConfig;
@@ -180,4 +190,5 @@ export interface Config {
   comments?: CommentsConfig;
   anime?: AnimeConfig;
   github?: GithubConfig;
+  music?: MusicConfig;
 }

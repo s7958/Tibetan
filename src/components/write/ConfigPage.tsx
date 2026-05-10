@@ -63,9 +63,26 @@ export function ConfigPage() {
     }, [isAuth])
 
     useEffect(() => {
+        // 从服务端注入的歌单数据初始化
+        const serverPlaylists = (window as any).__SERVER_PLAYLISTS__
+        if (serverPlaylists && Array.isArray(serverPlaylists) && serverPlaylists.length > 0) {
+            setParsedConfig((prev: any) => {
+                if (!prev) return { music: { playlists: serverPlaylists } }
+                if (!prev.music?.playlists?.length) {
+                    return { ...prev, music: { ...prev.music, playlists: serverPlaylists } }
+                }
+                return prev
+            })
+        }
+    }, [])
+
+    useEffect(() => {
         if (configContent && mode === 'visual') {
             try {
-                const parsed = yaml.load(configContent)
+                const parsed = yaml.load(configContent) as any
+                // 确保 music.playlists 存在
+                if (!parsed.music) parsed.music = { playlists: [] }
+                if (!parsed.music.playlists) parsed.music.playlists = []
                 setParsedConfig(parsed)
             } catch (e) {
                 console.error(e)
@@ -82,26 +99,53 @@ export function ConfigPage() {
             try {
                 token = await getAuthToken()
             } catch (e) {
-                // Ignore auth error, try public access
                 console.log('Public access mode')
             }
 
-            // 即使没有 token 也尝试读取（对于公开仓库）
-            const content = await readTextFileFromRepo(
-                token,
-                GITHUB_CONFIG.OWNER,
-                GITHUB_CONFIG.REPO,
-                'ryuchan.config.yaml',
-                GITHUB_CONFIG.BRANCH
-            )
+            // 尝试从 GitHub 读取配置
+            let content: string | null | undefined
+            try {
+                content = await readTextFileFromRepo(
+                    token,
+                    GITHUB_CONFIG.OWNER,
+                    GITHUB_CONFIG.REPO,
+                    'ryuchan.config.yaml',
+                    GITHUB_CONFIG.BRANCH
+                )
+            } catch (e) {
+                console.log('GitHub fetch failed, trying local config...')
+            }
+
+            // 如果 GitHub 没有数据，尝试从本地加载（开发环境）
+            if (!content) {
+                try {
+                    const localRes = await fetch('/ryuchan.config.yaml')
+                    if (localRes.ok) {
+                        content = await localRes.text()
+                        console.log('Loaded config from local file')
+                    }
+                } catch (e) {
+                    console.log('Local config not available')
+                }
+            }
+
             if (content) {
-                // 如果本地已有未保存的更改（isDirty），则不要覆盖用户当前编辑
                 if (isDirty) {
                     toast.info('检测到本地未保存更改，已跳过远程配置覆盖')
                 } else {
                     setConfigContent(content)
                     try {
-                        setParsedConfig(yaml.load(content))
+                        const parsed = yaml.load(content) as any
+                        if (!parsed.music) parsed.music = { playlists: [] }
+                        if (!parsed.music.playlists) parsed.music.playlists = []
+                        // 如果远程配置没有歌单，使用服务端注入的本地歌单
+                        if (parsed.music.playlists.length === 0) {
+                            const serverPlaylists = (window as any).__SERVER_PLAYLISTS__
+                            if (serverPlaylists && Array.isArray(serverPlaylists) && serverPlaylists.length > 0) {
+                                parsed.music.playlists = serverPlaylists
+                            }
+                        }
+                        setParsedConfig(parsed)
                     } catch (e) {
                         console.error(e)
                     }
@@ -173,6 +217,44 @@ export function ConfigPage() {
         }
         updateConfigValue('user.sidebar.social', social)
     }
+
+    // --- Playlist CRUD (歌单列表管理 - 管理歌单ID和名称) ---
+    const addPlaylistEntry = () => {
+        const playlists = [...(parsedConfig?.music?.playlists || [])]
+        playlists.push({
+            id: '',
+            name: '',
+            server: 'netease'
+        })
+        updateConfigValue('music.playlists', playlists)
+        toast.success('已添加歌单条目')
+    }
+
+    const removePlaylistEntry = (index: number) => {
+        const playlists = [...(parsedConfig?.music?.playlists || [])]
+        const removed = playlists[index]
+        playlists.splice(index, 1)
+        updateConfigValue('music.playlists', playlists)
+        toast.info(`已移除歌单: ${removed?.name || removed?.id || '未命名'}`)
+    }
+
+    const updatePlaylistEntry = (index: number, field: string, value: string) => {
+        const playlists = JSON.parse(JSON.stringify(parsedConfig?.music?.playlists || []))
+        if (!playlists[index]) playlists[index] = {}
+        playlists[index][field] = value
+        updateConfigValue('music.playlists', playlists)
+    }
+
+    const movePlaylistEntry = (index: number, direction: 'up' | 'down') => {
+        const playlists = [...(parsedConfig?.music?.playlists || [])]
+        if (direction === 'up' && index > 0) {
+            [playlists[index], playlists[index - 1]] = [playlists[index - 1], playlists[index]]
+        } else if (direction === 'down' && index < playlists.length - 1) {
+            [playlists[index], playlists[index + 1]] = [playlists[index + 1], playlists[index]]
+        }
+        updateConfigValue('music.playlists', playlists)
+    }
+    // --- End Playlist CRUD ---
 
     const handleSave = async () => {
         if (!window.confirm('确定保存配置吗？这将直接推送到 GitHub 仓库。')) {
@@ -660,31 +742,88 @@ export function ConfigPage() {
                                             </div>
                                         </div>
 
+                                    </div>
+                                </div>
+
+                                {/* 音乐配置 */}
+                                <div className="space-y-6">
+                                    <div className="flex items-center gap-2 pb-2 border-b border-base-200">
+                                        <div className="w-1 h-5 rounded-full" style={{ backgroundColor: 'oklch(var(--p))' }}></div>
+                                        <h3 className="font-bold text-lg" style={{ color: 'oklch(var(--p))' }}>音乐配置</h3>
+                                    </div>
+                                    <div className="card bg-base-100 shadow-sm border border-base-200 p-6 rounded-2xl space-y-8">
+
+                                        {/* Meting 歌词翻译 */}
+                                        <div className="space-y-3">
+                                            <div className="flex items-center justify-between">
+                                                <div className="flex items-center gap-2">
+                                                    <div className="badge badge-accent badge-outline">Meting</div>
+                                                    <span className="text-sm font-medium">歌词翻译</span>
+                                                </div>
+                                                <label className="cursor-pointer label p-0 gap-2">
+                                                    <span className="label-text font-medium text-sm">解析并显示译文</span>
+                                                    <input type="checkbox" className="toggle toggle-md toggle-primary"
+                                                        checked={parsedConfig?.site?.meting?.trans !== false}
+                                                        onChange={e => updateConfigValue('site.meting.trans', e.target.checked)} />
+                                                </label>
+                                            </div>
+                                        </div>
+
                                         <div className="divider my-0"></div>
 
-                                        {/* Meting API */}
+                                        {/* 歌单列表管理 */}
                                         <div className="space-y-3">
                                             <div className="flex items-center gap-2">
-                                                <div className="badge badge-accent badge-outline">Meting</div>
-                                                <span className="text-sm font-medium">音乐播放器</span>
+                                                <div className="badge badge-accent badge-outline">歌单</div>
+                                                <span className="text-sm font-medium">歌单列表</span>
+                                                <span className="text-xs text-base-content/50 ml-auto">{(parsedConfig?.music?.playlists || []).length} 个歌单</span>
                                             </div>
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                                                <div className="form-control w-full">
-                                                    <label className="label"><span className="label-text text-xs text-base-content/60">网易云歌单ID</span></label>
-                                                    <input type="text" className="input input-bordered w-full bg-base-100 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                                                        placeholder="例如: 8900628861"
-                                                        value={parsedConfig?.site?.meting?.id || ''}
-                                                        onChange={e => updateConfigValue('site.meting.id', e.target.value)} />
-                                                </div>
-                                                <div className="form-control w-full flex-row items-center pt-8">
-                                                    <label className="cursor-pointer label p-0 gap-2">
-                                                        <span className="label-text font-medium text-sm">解析并显示译文</span>
-                                                        <input type="checkbox" className="toggle toggle-md toggle-primary"
-                                                            checked={parsedConfig?.site?.meting?.trans !== false}
-                                                            onChange={e => updateConfigValue('site.meting.trans', e.target.checked)} />
-                                                    </label>
-                                                </div>
+
+                                            <div className="space-y-2">
+                                                {(parsedConfig?.music?.playlists || []).map((item: any, index: number) => (
+                                                    <div key={index} className="collapse collapse-arrow bg-base-200/50 rounded-xl border border-base-300">
+                                                        <input type="checkbox" className="peer" />
+                                                        <div className="collapse-title text-sm font-medium flex items-center gap-3 pr-2 min-h-0 py-3">
+                                                            <span className="badge badge-sm font-mono">{String(index + 1).padStart(2, '0')}</span>
+                                                            <span className="flex-1 truncate">{item.name || '未命名歌单'}</span>
+                                                            <span className="badge badge-xs badge-ghost font-mono text-xs truncate max-w-[100px]">{item.id || '无ID'}</span>
+                                                            <button
+                                                                className="btn btn-xs btn-ghost btn-square text-error hover:bg-error/10 z-10"
+                                                                onClick={(e) => { e.stopPropagation(); removePlaylistEntry(index) }}
+                                                            >
+                                                                ✕
+                                                            </button>
+                                                        </div>
+                                                        <div className="collapse-content">
+                                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 pb-1">
+                                                                <div className="form-control w-full">
+                                                                    <label className="label py-0.5"><span className="label-text text-xs text-base-content/60">歌单名称</span></label>
+                                                                    <input type="text" className="input input-sm input-bordered w-full bg-base-100 focus:border-primary"
+                                                                        placeholder="例如: 我的最爱"
+                                                                        value={item.name || ''}
+                                                                        onChange={e => updatePlaylistEntry(index, 'name', e.target.value)} />
+                                                                </div>
+                                                                <div className="form-control w-full">
+                                                                    <label className="label py-0.5"><span className="label-text text-xs text-base-content/60">网易云歌单 ID</span></label>
+                                                                    <input type="text" className="input input-sm input-bordered w-full bg-base-100 focus:border-primary font-mono text-xs"
+                                                                        placeholder="例如: 17957187425"
+                                                                        value={item.id || ''}
+                                                                        onChange={e => updatePlaylistEntry(index, 'id', e.target.value)} />
+                                                                </div>
+                                                            </div>
+                                                            <div className="flex items-center gap-2 mt-3 pt-2 border-t border-base-300">
+                                                                <button onClick={() => movePlaylistEntry(index, 'up')} className="btn btn-xs btn-ghost" disabled={index === 0}>↑ 上移</button>
+                                                                <button onClick={() => movePlaylistEntry(index, 'down')} className="btn btn-xs btn-ghost" disabled={index === (parsedConfig?.music?.playlists?.length || 0) - 1}>↓ 下移</button>
+                                                                <div className="flex-1"></div>
+                                                                <button onClick={() => removePlaylistEntry(index)} className="btn btn-xs btn-outline btn-error">删除</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                ))}
                                             </div>
+                                            <button onClick={addPlaylistEntry} className="btn btn-outline btn-sm w-full border-dashed border-2 text-base-content/50 hover:text-accent hover:border-accent hover:bg-accent/5">
+                                                + 添加歌单
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
