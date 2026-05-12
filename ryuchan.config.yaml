@@ -7,7 +7,7 @@ site:
   theme:
     light: garden
     dark: dracula
-    code: github-dark
+    code: snazzy-light
   date_format: ddd MMM DD YYYY
   blog:
     pageSize: 8
