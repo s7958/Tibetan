@@ -195,8 +195,9 @@ export async function readTextFileFromRepo(token: string | null | undefined, own
 		headers.Authorization = `Bearer ${token}`
 	}
 
-	const res = await fetch(`${GH_API}/repos/${owner}/${repo}/contents/${encodeURIComponent(path)}?ref=${encodeURIComponent(ref)}`, {
-		headers
+	const res = await fetch(`${GH_API}/repos/${owner}/${repo}/contents/${encodeURIComponent(path)}?ref=${encodeURIComponent(ref)}&t=${Date.now()}`, {
+		headers,
+		cache: 'no-store'
 	})
 	if (res.status === 401) handle401Error()
 	if (res.status === 422) handle422Error()
@@ -221,8 +222,9 @@ export async function listRepoFilesRecursive(token: string | null | undefined, o
 			headers.Authorization = `Bearer ${token}`
 		}
 
-		const res = await fetch(`${GH_API}/repos/${owner}/${repo}/contents/${encodeURIComponent(targetPath)}?ref=${encodeURIComponent(ref)}`, {
-			headers
+		const res = await fetch(`${GH_API}/repos/${owner}/${repo}/contents/${encodeURIComponent(targetPath)}?ref=${encodeURIComponent(ref)}&t=${Date.now()}`, {
+			headers,
+			cache: 'no-store'
 		})
 		if (res.status === 401) handle401Error()
 		if (res.status === 422) handle422Error()
