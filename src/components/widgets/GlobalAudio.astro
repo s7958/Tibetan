@@ -518,6 +518,11 @@ const initialSong = musicList[0] || {};
                     if (span) { span.style.color = ''; span.classList.add('text-neu-text-muted'); }
                 }
             });
+            // Auto-scroll active entry into view
+            const activeEntry = document.querySelector('.playlist-entry-item.playlist-active');
+            if (activeEntry) {
+                activeEntry.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
         }
 
         renderPlaylistList() {
