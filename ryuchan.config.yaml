@@ -183,6 +183,10 @@ user:
         ariaLabel: Telegram
         title: Telegram
         svg: ri:telegram-line
+      - href: test
+        title: Zhihu
+        ariaLabel: Zhihu
+        svg: ri:zhihu-line
 comments:
   enable: true
   type: twikoo
