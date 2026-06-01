@@ -86,6 +86,11 @@ const {
   document.addEventListener("DOMContentLoaded", () => {
     mountWaline();
   });
+
+  // 兜底：脚本执行时 DOM 已就绪，直接挂载
+  if (document.readyState !== "loading") {
+    mountWaline();
+  }
 </script>
 
 <style>
