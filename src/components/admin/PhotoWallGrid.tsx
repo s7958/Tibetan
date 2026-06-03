@@ -17,9 +17,18 @@ const VARIANT_RATIO: Record<string, string> = {
   '9x16': '9 / 16',
 }
 
+// 为 <img> 提供 width/height 属性，确保浏览器在懒加载前就能预留正确的盒子空间
+const VARIANT_DIMENSIONS: Record<string, { w: number; h: number }> = {
+  '1x1': { w: 400, h: 400 },
+  '4x3': { w: 400, h: 300 },
+  '4x5': { w: 400, h: 500 },
+  '9x16': { w: 360, h: 640 },
+}
+
 function PhotoImage({ photo }: { photo: Photo }) {
   const [error, setError] = useState(false)
   const [loaded, setLoaded] = useState(false)
+  const dims = VARIANT_DIMENSIONS[photo.variant] || VARIANT_DIMENSIONS['1x1']
 
   if (error) {
     return (
@@ -43,7 +52,9 @@ function PhotoImage({ photo }: { photo: Photo }) {
       <img
         src={photo.src}
         alt={photo.title || ''}
-        className={`absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-all duration-500 ease-out ${loaded ? 'opacity-100' : 'opacity-0'}`}
+        width={dims.w}
+        height={dims.h}
+        className={`w-full h-full object-cover transform group-hover:scale-105 transition-all duration-500 ease-out ${loaded ? 'opacity-100' : 'opacity-0'}`}
         loading="lazy"
         onLoad={() => setLoaded(true)}
         onError={() => { setLoaded(true); setError(true) }}

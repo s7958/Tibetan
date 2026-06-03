@@ -8,6 +8,14 @@ export const polaroidVariants = {
   "9x16": "w-32 h-48",
 };
 
+// 根据 variant 提供 img 的 width/height 属性，确保浏览器在图片加载前就知道盒子大小
+const VARIANT_DIMENSIONS: Record<string, { w: number; h: number }> = {
+  "1x1": { w: 128, h: 128 },
+  "4x5": { w: 128, h: 160 },
+  "4x3": { w: 128, h: 96 },
+  "9x16": { w: 128, h: 192 },
+};
+
 interface PolaroidProps {
   src: string;
   index?: number;
@@ -28,6 +36,7 @@ const Polaroid = ({
   isVisible,
 }: PolaroidProps) => {
   const variantClasses = polaroidVariants[variant] || polaroidVariants["1x1"];
+  const dims = VARIANT_DIMENSIONS[variant] || VARIANT_DIMENSIONS["1x1"];
   const randomRotation = useMemo(() => Math.random() * 30 - 15, []);
   const [loaded, setLoaded] = useState(false);
 
@@ -93,6 +102,9 @@ const Polaroid = ({
             className={`object-cover rounded-sm transition-all duration-300 group-hover:scale-105 w-full h-full ${loaded ? 'opacity-100' : 'opacity-0'}`}
             src={src}
             alt=""
+            width={dims.w}
+            height={dims.h}
+            loading="lazy"
             onLoad={() => setLoaded(true)}
             onError={() => setLoaded(true)}
           />
