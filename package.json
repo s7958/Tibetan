@@ -14,6 +14,8 @@
     "preview": "pnpm build && wrangler pages dev dist",
     "astro": "astro",
     "deploy": "pnpm build && wrangler pages deploy dist",
+    "deploy:worker": "pnpm build && wrangler deploy",
+    "preview:worker": "pnpm build && wrangler dev",
     "cf-typegen": "wrangler types"
   },
   "dependencies": {
